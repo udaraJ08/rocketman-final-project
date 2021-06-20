@@ -80,4 +80,16 @@ public class BookingController {
                 HttpStatus.CREATED
         );
     }
+
+    @GetMapping("/getAll/today")
+    public ResponseEntity<StandardDataFormat> getTodayBookings(){
+
+        return new ResponseEntity<>(
+                new StandardDataFormat(
+                        "Bookings",
+                        "Today Booking",
+                        bookingService.getAllTodayBooking()
+                ),HttpStatus.FOUND
+        );
+    }
 }

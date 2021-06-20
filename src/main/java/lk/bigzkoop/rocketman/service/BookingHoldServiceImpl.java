@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +44,6 @@ public class BookingHoldServiceImpl implements BookingHoldService {
     @Override
     public boolean addBookingHold(BookingHoldDTO dto) {
 
-//        bookingHoldRepo.save(mapper.map(dto, BookingHold.class));
         Optional<Driver> driver = driverRepo.findById(dto.getDriver_NIC());
         Optional<Customer> customer = customerRepo.findById(dto.getCustomer_NIC());
         Optional<Vehicle> vehicle = vehicleRepo.findById(dto.getVehicleNumber());
@@ -51,8 +52,8 @@ public class BookingHoldServiceImpl implements BookingHoldService {
         hold.setCustomer(customer.get());
         hold.setDriver(driver.get());
         hold.setVehicle(vehicle.get());
+        hold.setBookingDate(Date.valueOf(LocalDate.now()));
 
-        //saving the booking
         bookingHoldRepo.save(hold);
         return true;
     }

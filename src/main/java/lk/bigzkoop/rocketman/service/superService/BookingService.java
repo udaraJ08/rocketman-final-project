@@ -26,4 +26,6 @@ public interface BookingService {
     List<Booking> getAllBookingByStatus(String status);
 
     List<Booking> getAllBooking();
+
+    List<Booking> getAllTodayBooking();
 }

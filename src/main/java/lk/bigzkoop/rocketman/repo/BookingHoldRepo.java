@@ -13,24 +13,6 @@ public interface BookingHoldRepo extends JpaRepository<BookingHold, Integer> {
 
     List<BookingHold> findAllByBookingStatus(String status);
 
-
-//    @Query("select b.vehicle from Booking b where " +
-//            "((b.departureDate <= ?1 and ?2 <=b.arrivalDate) or " +
-//            "(b.departureDate >= ?1 and ?2 >=b.arrivalDate)) " +
-//            "and" +
-//            "(b.bookingStatus = 'open' or b.bookingStatus = 'departured' or b.bookingStatus='arrived')")
-//    List<Vehicle> getVehicleListByDate(Date startDate, Date releaseDate);
-
-//    @Query("select b.driver from Booking b where " +
-//            "((b.departureDate <= ?1 and ?2 <=b.arrivalDate) or " +
-//            "(b.departureDate >= ?1 and ?2 >=b.arrivalDate)) and " +
-//            "(b.bookingStatus = 'open' or b.bookingStatus = 'departured')")
-//    List<Driver> getDriverListByDate(Date startDate, Date releaseDate);
-
-    ////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////
-
-
     @Query("select b.vehicle from Booking b where " +
             "((b.departureDate <= ?1 and ?2 <=b.releaseDate) or " +
             "(b.departureDate >= ?1 and ?2 >=b.releaseDate))" +

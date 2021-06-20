@@ -61,6 +61,7 @@ public class BookingServiceImpl implements BookingService {
 
         hold.setBookingStatus(dataDTO.getBookingStatus());
         booking.setBookingStatus(dataDTO.getBookingStatus());
+        booking.setBookingDate(Date.valueOf(LocalDate.now()));
 
         bookingHoldRepo.save(hold);
         return bookingRepo.save(booking);
@@ -202,5 +203,13 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> getAllBooking() {
 
         return bookingRepo.findAll();
+    }
+
+    @Override
+    public List<Booking> getAllTodayBooking() {
+
+        Date date = Date.valueOf(LocalDate.now());
+
+        return bookingRepo.getAllTodayBookings(date);
     }
 }

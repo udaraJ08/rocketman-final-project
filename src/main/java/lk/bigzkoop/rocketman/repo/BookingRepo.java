@@ -19,4 +19,10 @@ public interface BookingRepo extends JpaRepository<Booking, String> {
     List<BookingAndCustomer> getAllBookingAndCustomer(String NIC);
 
     List<Booking> findAllByBookingStatus(String status);
+
+    @Query(
+            "SELECT b from Booking b where b.bookingDate = ?1 and not" +
+                    " b.bookingStatus = 'cancel'"
+    )
+    List<Booking> getAllTodayBookings(Date date);
 }
