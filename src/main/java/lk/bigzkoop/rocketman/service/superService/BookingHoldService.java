@@ -17,4 +17,6 @@ public interface BookingHoldService {
     boolean deleteBookingHold(int id);
 
     ValidityDriverVehicleDTO getValidityVehicleDriverAll(ValidityDateDTO dataDTO);
+
+    List<BookingHold> getBookingByCustomerNIC(String NIC);
 }

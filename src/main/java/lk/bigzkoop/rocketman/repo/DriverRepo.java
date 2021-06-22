@@ -29,4 +29,7 @@ public interface DriverRepo extends JpaRepository<Driver, String> {
                     " and d.driverStatus = 'open'"
     )
     List<Driver> getAllDriverBySearch(String key);
+
+    @Query("select d from Driver d where d.driver_NIC = ?1 and d.driverStatus = 'open'")
+    Driver getDriverByNIC(String nic);
 }

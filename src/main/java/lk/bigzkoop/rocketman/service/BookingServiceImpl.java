@@ -7,9 +7,11 @@ import lk.bigzkoop.rocketman.entity.BookingHold;
 import lk.bigzkoop.rocketman.entity.Payment;
 import lk.bigzkoop.rocketman.entity.Vehicle;
 import lk.bigzkoop.rocketman.entity.queryEntity.BookingAndCustomer;
+import lk.bigzkoop.rocketman.exceptions.NotFoundException;
 import lk.bigzkoop.rocketman.exceptions.ValidationException;
 import lk.bigzkoop.rocketman.repo.BookingHoldRepo;
 import lk.bigzkoop.rocketman.repo.BookingRepo;
+import lk.bigzkoop.rocketman.repo.DriverRepo;
 import lk.bigzkoop.rocketman.repo.PaymentRepo;
 import lk.bigzkoop.rocketman.service.superService.BookingService;
 import org.modelmapper.ModelMapper;
@@ -33,6 +35,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Autowired
     private PaymentRepo paymentRepo;
+
+    @Autowired
+    private DriverRepo driverRepo;
 
     @Autowired
     private ModelMapper mapper;
@@ -82,7 +87,6 @@ public class BookingServiceImpl implements BookingService {
 
         Vehicle vehicle = booking.getVehicle();
         Payment payment = new Payment();
-
 
         if (booking.getDuration().equalsIgnoreCase("day")) {
             payment.setStandardPayment(vehicle.getDailyRental());
@@ -212,4 +216,5 @@ public class BookingServiceImpl implements BookingService {
 
         return bookingRepo.getAllTodayBookings(date);
     }
+
 }

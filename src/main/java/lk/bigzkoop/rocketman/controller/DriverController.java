@@ -38,6 +38,7 @@ public class DriverController {
                 , HttpStatus.CREATED
         );
     }
+
     @GetMapping("/count")
     public long getDriverCount() {
         return driverService.getDriverCount();
@@ -54,7 +55,7 @@ public class DriverController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<StandardDataFormat> updateDriver(@RequestBody DriverDTO driverDTO){
+    public ResponseEntity<StandardDataFormat> updateDriver(@RequestBody DriverDTO driverDTO) {
 
         return new ResponseEntity<>(new StandardDataFormat(
                 "drivers",
@@ -64,12 +65,39 @@ public class DriverController {
     }
 
     @DeleteMapping("/remove")
-    public ResponseEntity<StandardDataFormat> removeDriver(@RequestParam String driverNIC){
+    public ResponseEntity<StandardDataFormat> removeDriver(@RequestParam String driverNIC) {
 
         return new ResponseEntity<>(new StandardDataFormat(
                 "driver",
                 "driver deleted",
                 driverService.removeDriver(driverNIC)
+        ), HttpStatus.FOUND);
+    }
+
+    @GetMapping("/driver-user")
+    public ResponseEntity<StandardDataFormat> getDriverData(@RequestParam String nic) {
+        return new ResponseEntity<>(new StandardDataFormat(
+                "driver",
+                "driver Data",
+                driverService.getDriver(nic)
+        ), HttpStatus.FOUND);
+    }
+
+    @GetMapping("/driver-user/allBooking")
+    public ResponseEntity<StandardDataFormat> getAllBookingByNIC(@RequestParam String nic) {
+        return new ResponseEntity<>(new StandardDataFormat(
+                "driver",
+                "Driver shedule",
+                driverService.getAllBookingsByDriverNIC(nic)
+        ), HttpStatus.FOUND);
+    }
+
+    @GetMapping("/driver-user/count")
+    public ResponseEntity<StandardDataFormat> getDriverBookingCount(@RequestParam String nic) {
+        return new ResponseEntity<>(new StandardDataFormat(
+                "driver",
+                "Bookings count",
+                driverService.allBookingCountByDriver(nic)
         ), HttpStatus.FOUND);
     }
 }

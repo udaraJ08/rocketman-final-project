@@ -26,4 +26,9 @@ public interface BookingHoldRepo extends JpaRepository<BookingHold, Integer> {
             "group by b.driver")
     List<Driver> getDriverListByDate(Date startDate, Date releaseDate);
 
+
+    @Query("select b from BookingHold b where " +
+            "b.customer.customer_NIC = ?1 and b.bookingStatus = 'request'")
+    List<BookingHold> getBookingHoldByNIC(String NIC);
+
 }

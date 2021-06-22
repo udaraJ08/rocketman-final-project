@@ -2,9 +2,11 @@ package lk.bigzkoop.rocketman.service;
 
 import lk.bigzkoop.rocketman.dto.DriverDTO;
 import lk.bigzkoop.rocketman.dto.VehicleDTO;
+import lk.bigzkoop.rocketman.entity.Booking;
 import lk.bigzkoop.rocketman.entity.Driver;
 import lk.bigzkoop.rocketman.exceptions.NotFoundException;
 import lk.bigzkoop.rocketman.exceptions.ValidationException;
+import lk.bigzkoop.rocketman.repo.BookingRepo;
 import lk.bigzkoop.rocketman.repo.DriverRepo;
 import lk.bigzkoop.rocketman.service.superService.DriverService;
 import org.modelmapper.ModelMapper;
@@ -21,6 +23,9 @@ public class DriverServiceImpl implements DriverService {
 
     @Autowired
     private DriverRepo driverRepo;
+
+    @Autowired
+    private BookingRepo bookingRepo;
 
     @Autowired
     private ModelMapper mapper;
@@ -98,5 +103,30 @@ public class DriverServiceImpl implements DriverService {
         driverRepo.save(driver);
 
         return mapper.map(driver, DriverDTO.class);
+    }
+
+    @Override
+    public DriverDTO getDriver(String nic) {
+
+        if (Integer.parseInt(nic)==0 || !driverRepo.existsById(nic))
+            throw new NotFoundException("No Driver by that number");
+
+        return mapper.map(driverRepo.getDriverByNIC(nic), DriverDTO.class);
+    }
+
+    @Override
+    public List<Booking> getAllBookingsByDriverNIC(String NIC) {
+
+        return bookingRepo.getAllBookingByDriverNIC(NIC);
+    }
+
+    public long allBookingCountByDriver(String nic) {
+
+        if(!driverRepo.existsById(nic))
+            throw new NotFoundException("No driver by that number");
+        else if(nic.trim().length() == 0)
+            throw new ValidationException("Must include nic number to search");
+
+        return bookingRepo.getBookingCountByDriver(nic);
     }
 }

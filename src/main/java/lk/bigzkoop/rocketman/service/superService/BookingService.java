@@ -28,4 +28,5 @@ public interface BookingService {
     List<Booking> getAllBooking();
 
     List<Booking> getAllTodayBooking();
+
 }

@@ -61,4 +61,14 @@ public class BookingHoldController {
                 HttpStatus.CREATED
         );
     }
+
+    @PostMapping("/search/user")
+    public ResponseEntity<StandardDataFormat> getCustomerByNIC(@RequestParam String nic){
+
+        return new ResponseEntity<>(new StandardDataFormat(
+                "customer",
+                "customer hold booking data",
+                bookingHoldService.getBookingByCustomerNIC(nic)
+        ), HttpStatus.FOUND);
+    }
 }

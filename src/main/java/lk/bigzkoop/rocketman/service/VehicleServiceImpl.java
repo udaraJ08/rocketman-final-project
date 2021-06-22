@@ -95,7 +95,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public VehicleDTO deleteVehicleByID(String vehicleNumber) {
 
-        if (vehicleNumber.trim().length()==0)
+        if (vehicleNumber.trim().length() == 0)
             throw new ValidationException("No Vehilce number detected to delete !!!");
 
         Vehicle vehicle = vehicleRepo.getById(vehicleNumber);

@@ -1,6 +1,7 @@
 package lk.bigzkoop.rocketman.service.superService;
 
 import lk.bigzkoop.rocketman.dto.VehicleDTO;
+import lk.bigzkoop.rocketman.entity.Booking;
 
 import java.util.List;
 

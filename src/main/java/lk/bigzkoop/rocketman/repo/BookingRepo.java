@@ -25,4 +25,12 @@ public interface BookingRepo extends JpaRepository<Booking, String> {
                     " b.bookingStatus = 'cancel'"
     )
     List<Booking> getAllTodayBookings(Date date);
+
+    @Query("select b from Booking b where b.driver.driver_NIC  = ?1 " +
+            "and b.bookingStatus = 'open'")
+    List<Booking> getAllBookingByDriverNIC(String NIC);
+
+    @Query("select count(b) from Booking b where" +
+            " b.bookingStatus = 'arrived' and b.driver.driver_NIC = ?1")
+    long getBookingCountByDriver(String nic);
 }
