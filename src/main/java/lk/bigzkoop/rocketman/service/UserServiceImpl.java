@@ -1,7 +1,7 @@
 package lk.bigzkoop.rocketman.service;
 
-import lk.bigzkoop.rocketman.dto.CustomerValidateDTO;
-import lk.bigzkoop.rocketman.dto.UserCustomerDTO;
+import lk.bigzkoop.rocketman.dto.ValidateUserDTO;
+import lk.bigzkoop.rocketman.dto.UserSignupDTO;
 import lk.bigzkoop.rocketman.entity.Customer;
 import lk.bigzkoop.rocketman.entity.UserCustomer;
 import lk.bigzkoop.rocketman.exceptions.ValidationException;
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     private ModelMapper mapper;
 
     @Override
-    public boolean addUser(UserCustomerDTO dto) {
+    public boolean addUser(UserSignupDTO dto) {
 
         if(dto.getCustomerNIC().trim().length() == 0 ||
                 dto.getCustomerUsername().trim().length() == 0 ||
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public String validateUser(CustomerValidateDTO dto) {
+    public String validateUser(ValidateUserDTO dto) {
 
         String nic = userRepo.customerValidity(dto.getUsername(), dto.getPassword());
 

@@ -1,7 +1,7 @@
 package lk.bigzkoop.rocketman.controller;
 
-import lk.bigzkoop.rocketman.dto.CustomerValidateDTO;
-import lk.bigzkoop.rocketman.dto.UserCustomerDTO;
+import lk.bigzkoop.rocketman.dto.ValidateUserDTO;
+import lk.bigzkoop.rocketman.dto.UserSignupDTO;
 import lk.bigzkoop.rocketman.service.superService.UserService;
 import lk.bigzkoop.rocketman.util.StandardDataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +18,13 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/signup")
-    public boolean signupCustomer(@RequestBody UserCustomerDTO dto){
+    public boolean signupCustomer(@RequestBody UserSignupDTO dto){
 
         return userService.addUser(dto);
     }
 
     @PostMapping("/check")
-    public ResponseEntity<StandardDataFormat> checkValidity(@RequestBody CustomerValidateDTO dto){
+    public ResponseEntity<StandardDataFormat> checkValidity(@RequestBody ValidateUserDTO dto){
 
         return new ResponseEntity<>(new StandardDataFormat(
            "validity",

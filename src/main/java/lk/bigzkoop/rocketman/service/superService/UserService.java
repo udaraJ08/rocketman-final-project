@@ -1,11 +1,11 @@
 package lk.bigzkoop.rocketman.service.superService;
 
-import lk.bigzkoop.rocketman.dto.CustomerValidateDTO;
-import lk.bigzkoop.rocketman.dto.UserCustomerDTO;
+import lk.bigzkoop.rocketman.dto.ValidateUserDTO;
+import lk.bigzkoop.rocketman.dto.UserSignupDTO;
 
 public interface UserService {
 
-    boolean addUser(UserCustomerDTO dto);
+    boolean addUser(UserSignupDTO dto);
 
-    String validateUser(CustomerValidateDTO dto);
+    String validateUser(ValidateUserDTO dto);
 }
